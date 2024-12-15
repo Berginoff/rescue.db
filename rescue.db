@@ -1,0 +1,71 @@
+res.json({
+        'config': config,
+        'zksync_wallets': zksyncWallets,
+        'layerzero_wallets': layerzeroWallets,
+        'zkbridge_wallets': zkbridgeWallets,
+        'hyperlane_wallets': hyperlaneWallets,
+        'wormhole_wallets': wormholeWallets,
+        'debridge_wallets': debridgeWallets,
+        'zora_wallets': zoraWallets,
+        'base_wallets': baseWallets,
+        'aptos_wallets': aptosWallets,
+        'linea_wallets': lineaWallets,
+        'scroll_wallets': scrollWallets,
+        'polygonzkevm_wallets': polygonzkevmWallets,
+        'clusters_wallets': clustersWallets,
+        'rabby_wallets': rabbyWallets,
+        'evm_wallets': evmWallets,
+        'balance_wallets': balanceWallets,
+        'nft_wallets': nftWallets,
+        'galxe_wallets': galxeWallets,
+        'jumper_wallets': jumperWallets,
+        'story_wallets': storyWallets,
+        'eclipse_wallets': eclipseWallets,
+    })
+})
+
+// JUMPER API
+apiRoutes.get('/jumper', isAuthenticated, async (req, res) => {
+    const responseData = await jumperData()
+    res.json(responseData)
+})
+
+apiRoutes.get('/jumper/refresh', isAuthenticated, async (req, res) => {
+    const wallet = req.query.wallet ? req.query.wallet : ''
+    await jumperFetchWallet(wallet)
+    res.json(true)
+})
+
+apiRoutes.get('/jumper/clean', isAuthenticated, async (req, res) => {
+    await jumperClean()
+    res.json(true)
+})
+
+// ZKSYNC API
+apiRoutes.get('/zksync', isAuthenticated, async (req, res) => {
+    const responseData = await zkSyncData()
+    res.json(responseData)
+})
+
+apiRoutes.get('/zksync/refresh', isAuthenticated, async (req, res) => {
+    const wallet = req.query.wallet ? req.query.wallet : ''
+    await zkSyncFetchWallet(wallet)
+    res.json(true)
+})
+
+apiRoutes.get('/zksync/clean', isAuthenticated, async (req, res) => {
+    await zkSyncClean()
+    res.json(true)
+})
+
+// WORMHOLE API
+apiRoutes.get('/wormhole', isAuthenticated, async (req, res) => {
+    const responseData = await wormholeData()
+    res.json(responseData)
+})
+
+apiRoutes.get('/wormhole/refresh', isAuthenticated, async (req, res) => {
+    const wallet = req.query.wallet ? req.query.wallet : ''
+    await wormholeFetchWallet(wallet)
+    res.json(true)
+})
